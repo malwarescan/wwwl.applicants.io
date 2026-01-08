@@ -6,10 +6,11 @@ definePageMeta({
 })
 
 const { data: page } = await useAsyncData('about', async () => {
-  // Try pages collection first (about.md is in the pages collection)
+  // Try pages collection first using Content v3 correct API
   try {
-    const pages = await queryCollection('pages').find()
-    const aboutPage = pages.find(p => p._path === '/about' || p.path === '/about')
+    const aboutPage = await queryCollection('pages')
+      .where({ path: '/about' })
+      .first()
     if (aboutPage) return aboutPage
   } catch (e) {
     // Continue to fallback

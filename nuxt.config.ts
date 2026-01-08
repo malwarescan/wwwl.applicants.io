@@ -46,9 +46,12 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/'
+        '/',
+        '/about',
+        '/companies'
       ],
       crawlLinks: true,
+      failOnError: false,
       autoSubfolderIndex: false
     }
   },
@@ -116,6 +119,17 @@ export default defineNuxtConfig({
   
   sitemap: {
     hostname: process.env.SITE_URL || process.env.NUXT_PUBLIC_SITE_URL || 'https://applicants.io'
+  },
+
+  feedme: {
+    content: {
+      collections: [
+        'companies',
+        'guides',
+        'methodology',
+        'networks'
+      ]
+    }
   },
 
   // hotjar: {

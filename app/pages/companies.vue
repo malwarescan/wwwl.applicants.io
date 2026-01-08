@@ -5,11 +5,11 @@ definePageMeta({
 
 // Fetch all companies (exclude index and templates)
 const { data: companies } = await useAsyncData('companies-list', async () => {
+  // Use Content v3 correct API: .all() returns array, then filter client-side
   const allCompanies = await queryCollection('companies')
-    .find()
+    .all()
     
-  // Filter out any companies that don't have required fields
-  // Use optional chaining and ensure _file exists before comparing
+  // Filter out templates and index files
   const validCompanies = allCompanies.filter(company => {
     if (!company || !company._file) return false
     const fileName = String(company._file || '')
