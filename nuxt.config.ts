@@ -67,33 +67,55 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://docs-template.nuxt.dev/',
-    title: 'Nuxt Docs Template',
-    description: 'A template for building documentation with Nuxt UI and Nuxt Content.',
+    domain: 'https://applicants.io/',
+    title: 'Applicants.io',
+    description: 'Candidate intelligence platform for evaluating job opportunities.',
     full: {
-      title: 'Nuxt Docs Template - Full Documentation',
-      description: 'This is the full documentation for the Nuxt Docs Template.'
+      title: 'Applicants.io - Candidate Intelligence Platform',
+      description: 'Evidence-based risk assessments and analysis of company recruiting patterns.'
     },
     sections: [
       {
-        title: 'Getting Started',
-        contentCollection: 'docs',
+        title: 'Companies',
+        contentCollection: 'companies',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/getting-started%' }
+          { field: 'path', operator: 'LIKE', value: '/companies%' }
         ]
       },
       {
-        title: 'Essentials',
-        contentCollection: 'docs',
+        title: 'Methodology',
+        contentCollection: 'methodology',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/essentials%' }
+          { field: 'path', operator: 'LIKE', value: '/methodology%' }
+        ]
+      },
+      {
+        title: 'Guides',
+        contentCollection: 'guides',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/guides%' }
+        ]
+      },
+      {
+        title: 'Networks',
+        contentCollection: 'networks',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/networks%' }
         ]
       }
     ]
   },
 
   mcp: {
-    name: 'Docs template'
+    name: 'Applicants.io'
+  },
+
+  site: {
+    url: process.env.SITE_URL || process.env.NUXT_PUBLIC_SITE_URL || 'https://applicants.io'
+  },
+  
+  sitemap: {
+    hostname: process.env.SITE_URL || process.env.NUXT_PUBLIC_SITE_URL || 'https://applicants.io'
   },
 
   // hotjar: {
@@ -105,6 +127,15 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: process.env.SITE_URL || 'https://applicants.io'
+    }
+  },
+
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ]
     }
   }
 })

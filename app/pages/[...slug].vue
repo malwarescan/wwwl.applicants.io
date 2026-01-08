@@ -133,9 +133,14 @@ useSeoMeta({
 
 const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path))
 
-defineOgImageComponent('Applicants', {
-  headline: headline.value
-})
+// Use Docs component (nuxt-og-image auto-discovers OgImageDocs.vue from OgImage/ directory as 'Docs')
+if (headline.value && title && description) {
+  defineOgImageComponent('Docs', {
+    headline: headline.value,
+    title: title,
+    description: description
+  })
+}
 
 const links = computed(() => {
   const links = []

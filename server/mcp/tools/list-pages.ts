@@ -26,9 +26,23 @@ OUTPUT: Returns a structured list with:
     const siteUrl = import.meta.dev ? `${url.protocol}//${url.hostname}:${url.port}` : url.origin
 
     try {
-      const pages = await queryCollection(event, 'docs')
-        .select('title', 'path', 'description')
-        .all()
+      // Query all available collections
+      const collections = ['companies', 'methodology', 'guides', 'networks', 'pages']
+      const allPages = []
+      
+      for (const collection of collections) {
+        try {
+          const pages = await queryCollection(event, collection)
+            .select('title', 'path', 'description')
+            .all()
+          allPages.push(...pages)
+        } catch (e) {
+          // Skip collections that don't exist or have errors
+          continue
+        }
+      }
+      
+      const pages = allPages
 
       const result = pages.map(page => ({
         title: page.title,

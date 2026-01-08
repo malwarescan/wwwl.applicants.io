@@ -11,7 +11,20 @@ export default eventHandler(async (event) => {
 
   const path = withLeadingSlash(slug.replace('.md', ''))
 
-  const page = await queryCollection(event, 'docs' as keyof Collections).path(path).first()
+  // Try all collections to find the page
+  const collections: Array<keyof Collections> = ['companies', 'methodology', 'guides', 'networks', 'pages', 'landing']
+  let page = null
+  
+  for (const collection of collections) {
+    try {
+      page = await queryCollection(event, collection).path(path).first()
+      if (page) break
+    } catch (e) {
+      // Continue to next collection
+      continue
+    }
+  }
+  
   if (!page) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
   }

@@ -90,3 +90,6 @@ Display risk score information manually in markdown, matching the component outp
 - **High (60-79)**: Orange
 - **Severe (80-100)**: Red
 
+
+
+

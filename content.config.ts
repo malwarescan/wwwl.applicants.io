@@ -91,6 +91,19 @@ export default defineContentConfig({
           description: z.string()
         }).optional()
       })
+    }),
+    pages: defineCollection({
+      type: 'page',
+      source: {
+        include: '*.md',
+        exclude: 'index.md'
+      },
+      schema: z.object({
+        seo: z.object({
+          title: z.string(),
+          description: z.string()
+        }).optional()
+      })
     })
   }
 })

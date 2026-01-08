@@ -6,14 +6,23 @@ definePageMeta({
 // Fetch all companies (exclude index and templates)
 const { data: companies } = await useAsyncData('companies-list', async () => {
   const allCompanies = await queryCollection('companies')
-    .where({ 
-      slug: { $ne: null },
-      path: { $ne: '/companies/index' }
-    })
     .find()
+    
+  // Filter out any companies that don't have required fields
+  // Use optional chaining and ensure _file exists before comparing
+  const validCompanies = allCompanies.filter(company => {
+    if (!company || !company._file) return false
+    const fileName = String(company._file || '')
+    const fileId = String(company._id || '')
+    const filePath = String(company._path || '')
+    return fileName !== '_template.md' &&
+           fileName !== '_company-template.md' &&
+           fileId !== 'content:companies:index.md' &&
+           filePath !== '/companies/index'
+  })
 
   // Sort by risk score (highest first), then by last_updated
-  const sorted = allCompanies.sort((a, b) => {
+  const sorted = validCompanies.sort((a, b) => {
     const scoreA = a.risk_score?.total || 0
     const scoreB = b.risk_score?.total || 0
     if (scoreA !== scoreB) return scoreB - scoreA
