@@ -53,7 +53,15 @@ export default defineNuxtConfig({
       crawlLinks: true,
       failOnError: false,
       autoSubfolderIndex: false
-    }
+    },
+    // Ensure unhead and related packages are bundled (not externalized)
+    // This prevents ERR_MODULE_NOT_FOUND at runtime in production
+    inline: [
+      'unhead',
+      '@unhead/vue',
+      '@unhead/addons',
+      '@unhead/schema-org'
+    ]
   },
 
   eslint: {
