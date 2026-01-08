@@ -61,7 +61,17 @@ export default defineNuxtConfig({
       '@unhead/vue',
       '@unhead/addons',
       '@unhead/schema-org'
-    ]
+    ],
+    // Explicitly exclude unhead packages from externals to force bundling
+    // Returning false means "don't externalize" = bundle it
+    externals: (id: string) => {
+      // Don't externalize unhead packages - force them to be bundled
+      if (id === 'unhead' || id.startsWith('@unhead/')) {
+        return false
+      }
+      // Let Nitro handle other externals with default behavior
+      return undefined
+    }
   },
 
   eslint: {
