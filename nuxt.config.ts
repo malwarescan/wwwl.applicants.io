@@ -54,14 +54,22 @@ export default defineNuxtConfig({
       failOnError: false,
       autoSubfolderIndex: false
     },
-    // Ensure unhead and related packages are bundled (not externalized)
+    // ROOT FIX: Use externals.inline (not inline) to properly bundle unhead packages
     // This prevents ERR_MODULE_NOT_FOUND at runtime in production
-    inline: [
-      'unhead',
-      '@unhead/vue',
-      '@unhead/addons',
-      '@unhead/schema-org'
-    ],
+    externals: {
+      inline: [
+        'unhead',
+        '@unhead/vue',
+        '@unhead/addons',
+        '@unhead/schema-org'
+      ]
+    },
+    // Ensure Node.js module resolution works correctly
+    node: true,
+    // Disable legacy externalization that might override inline settings
+    experimental: {
+      legacyExternals: false
+    },
     // Configure Rollup to explicitly exclude unhead packages from externalization
     rollupConfig: {
       external: (id: string, importer?: string) => {
