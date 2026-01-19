@@ -30,9 +30,9 @@ WORKFLOW: This tool returns the complete page content including title, descripti
       for (const collection of collections) {
         try {
           page = await queryCollection(event, collection)
-            .where('path', '=', path)
-            .select('title', 'path', 'description')
-            .first()
+        .where('path', '=', path)
+        .select('title', 'path', 'description')
+        .first()
           if (page) break
         } catch (e) {
           // Continue to next collection

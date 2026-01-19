@@ -33,8 +33,8 @@ OUTPUT: Returns a structured list with:
       for (const collection of collections) {
         try {
           const pages = await queryCollection(event, collection)
-            .select('title', 'path', 'description')
-            .all()
+        .select('title', 'path', 'description')
+        .all()
           allPages.push(...pages)
         } catch (e) {
           // Skip collections that don't exist or have errors
