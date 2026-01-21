@@ -3,6 +3,7 @@ title: "Example Company"
 description: "Risk score, reviews, patterns, and evidence for Example Company."
 headline: "Example Company company review and risk score"
 slug: "example-company"
+navigation: false
 industry: "Direct Sales"
 website: "https://example.com"
 hq: "New York, NY"
