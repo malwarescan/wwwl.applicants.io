@@ -38,7 +38,7 @@ Research companies before you interview. Applicants.io helps candidates identify
   :::
 ::
 
-::u-page-section{class="bg-white dark:bg-neutral-900 border-t border-neutral-200/60 dark:border-neutral-800"}
+::u-page-section{class="py-20 bg-white dark:bg-neutral-900"}
 #title
 How It Works
 
@@ -102,19 +102,18 @@ Our process follows five steps to transform public reports into actionable compa
   :::
 ::
 
-Each company page summarizes what is publicly reported, how often similar patterns appear, and what candidates commonly experience.
-
-:::u-button{class="mt-8"}
+:::u-button{class="mt-12 mx-auto block w-fit"}
 ---
 to: /methodology/overview
 size: lg
+color: primary
 trailing-icon: i-lucide-arrow-right
 ---
 See Methodology
 :::
 ::
 
-::u-page-section{class="bg-slate-50 dark:bg-neutral-950 border-t border-neutral-200/60 dark:border-neutral-800"}
+::u-page-section{class="py-20 bg-slate-50 dark:bg-neutral-950"}
 #title
 The Tools
 
@@ -136,7 +135,6 @@ Everything you need to research companies and make informed decisions:
   :::u-page-feature
   ---
   icon: i-lucide-bar-chart-3
-  featured: true
   ---
   #title
   Risk Scoring System
@@ -190,17 +188,18 @@ Everything you need to research companies and make informed decisions:
   :::
 ::
 
-:::u-button{class="mt-8"}
+:::u-button{class="mt-12 mx-auto block w-fit"}
 ---
 to: /companies
 size: lg
+color: primary
 trailing-icon: i-lucide-arrow-right
 ---
 Explore Tools
 :::
 ::
 
-::u-page-section{class="bg-white dark:bg-neutral-900 border-t border-neutral-200/60 dark:border-neutral-800"}
+::u-page-section{class="py-20 bg-white dark:bg-neutral-900"}
 #title
 Who This Is For
 
@@ -260,12 +259,18 @@ Applicants.io is designed for anyone who needs to evaluate job opportunities bef
   :::
 ::
 
-:::note{class="mt-8"}
-**Note:** Applicants.io does not host job listings and does not facilitate applications. We provide research tools to help you make informed decisions.
+:::u-button{class="mt-12 mx-auto block w-fit"}
+---
+to: /companies
+size: lg
+color: primary
+trailing-icon: i-lucide-arrow-right
+---
+Search Companies
 :::
 ::
 
-::u-page-section{class="bg-slate-50 dark:bg-neutral-950 border-t border-neutral-200/60 dark:border-neutral-800"}
+::u-page-section{class="py-20 bg-slate-50 dark:bg-neutral-950"}
 #title
 Important Clarification
 
@@ -273,9 +278,23 @@ Important Clarification
 Applicants.io does not claim that any company has engaged in unlawful conduct. All information is aggregated from publicly available sources and summarized to highlight recurring patterns described by multiple independent individuals.
 
 If you represent a company and believe information is inaccurate or incomplete, you may request a review by providing verifiable documentation.
+
+:::note{class="mt-8"}
+**Note:** Applicants.io does not host job listings and does not facilitate applications. We provide research tools to help you make informed decisions.
+:::
+
+:::u-button{class="mt-12 mx-auto block w-fit"}
+---
+to: /methodology/overview
+size: lg
+color: primary
+trailing-icon: i-lucide-arrow-right
+---
+Learn More
+:::
 ::
 
-::u-page-section{class="dark:bg-gradient-to-b from-neutral-950 to-neutral-900"}
+::u-page-section{class="py-20 dark:bg-gradient-to-b from-neutral-950 to-neutral-900"}
   :::u-page-c-t-a
   ---
   links:
