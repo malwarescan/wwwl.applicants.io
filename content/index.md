@@ -38,12 +38,12 @@ Research companies before you interview. Applicants.io helps candidates identify
   :::
 ::
 
-::u-page-section{class="dark:bg-neutral-950"}
+::u-page-section{class="bg-white dark:bg-neutral-900 border-t border-neutral-200/60 dark:border-neutral-800"}
 #title
 How It Works
 
 #description
-Our process follows five steps:
+Our process follows five steps to transform public reports into actionable company intelligence:
 
 ::steps
   :::step
@@ -51,10 +51,10 @@ Our process follows five steps:
   icon: i-lucide-database
   ---
   #title
-  Collection
+  Collect Public Signals
 
   #description
-  Public posts, reviews, and discussions are collected from multiple sources
+  Public posts, reviews, and discussions are collected from multiple independent sources
   :::
 
   :::step
@@ -62,10 +62,10 @@ Our process follows five steps:
   icon: i-lucide-file-check
   ---
   #title
-  Normalization
+  Normalize Company Identities
 
   #description
-  Company mentions are normalized into consistent entities
+  Company mentions are normalized into consistent entities across aliases and rebrands
   :::
 
   :::step
@@ -73,10 +73,10 @@ Our process follows five steps:
   icon: i-lucide-search
   ---
   #title
-  Pattern Detection
+  Detect Recurring Patterns
 
   #description
-  Repeated recruiting and compensation patterns are detected
+  Repeated recruiting and compensation patterns are identified and cataloged
   :::
 
   :::step
@@ -84,10 +84,10 @@ Our process follows five steps:
   icon: i-lucide-bar-chart-3
   ---
   #title
-  Risk Scoring
+  Score Risk Signals
 
   #description
-  A transparent risk score summarizes pattern density and repetition
+  A transparent risk score summarizes pattern density and repetition frequency
   :::
 
   :::step
@@ -95,19 +95,31 @@ Our process follows five steps:
   icon: i-lucide-file-text
   ---
   #title
-  Publication
+  Publish Evidence-Based Summary
 
   #description
-  Results are published as structured company intelligence pages
+  Results are published as structured company intelligence pages with source citations
   :::
 ::
 
 Each company page summarizes what is publicly reported, how often similar patterns appear, and what candidates commonly experience.
+
+:::u-button{class="mt-8"}
+---
+to: /methodology/overview
+size: lg
+trailing-icon: i-lucide-arrow-right
+---
+See Methodology
+:::
 ::
 
-::u-page-section{class="dark:bg-neutral-950"}
+::u-page-section{class="bg-slate-50 dark:bg-neutral-950 border-t border-neutral-200/60 dark:border-neutral-800"}
 #title
 The Tools
+
+#description
+Everything you need to research companies and make informed decisions:
 
 #features
   :::u-page-feature
@@ -118,18 +130,19 @@ The Tools
   Company Intelligence Pages
 
   #description
-  Structured summaries of publicly reported recruiting and compensation patterns associated with specific companies.
+  Structured summaries of publicly reported recruiting and compensation patterns associated with specific companies. Each page includes risk scores, evidence citations, and common patterns.
   :::
 
   :::u-page-feature
   ---
   icon: i-lucide-bar-chart-3
+  featured: true
   ---
   #title
   Risk Scoring System
 
   #description
-  A transparent scoring model that reflects how often specific high-churn recruiting signals appear across independent sources.
+  A transparent scoring model that reflects how often specific high-churn recruiting signals appear across independent sources. Understand risk levels at a glance.
   :::
 
   :::u-page-feature
@@ -140,7 +153,7 @@ The Tools
   Network Pattern Analysis
 
   #description
-  Identification of shared recruiting language, structures, and rebranding behavior across related companies.
+  Identification of shared recruiting language, structures, and rebranding behavior across related companies. Discover connections between organizations.
   :::
 
   :::u-page-feature
@@ -151,7 +164,7 @@ The Tools
   Candidate Guides
 
   #description
-  Plain-language explanations of common recruiting patterns such as commission-only roles, unpaid training periods, and group interview funnels.
+  Plain-language explanations of common recruiting patterns such as commission-only roles, unpaid training periods, and group interview funnels. Learn to recognize red flags.
   :::
 
   :::u-page-feature
@@ -162,7 +175,7 @@ The Tools
   Transparent Methodology
 
   #description
-  Clear explanation of how we collect data, normalize entities, score patterns, and determine publication eligibility.
+  Clear explanation of how we collect data, normalize entities, score patterns, and determine publication eligibility. Full transparency in our process.
   :::
 
   :::u-page-feature
@@ -173,16 +186,26 @@ The Tools
   Fast Search
 
   #description
-  Quickly find company pages, guides, and methodology information. Search across all content with instant results.
+  Quickly find company pages, guides, and methodology information. Search across all content with instant results and smart suggestions.
   :::
 ::
 
-::u-page-section{class="dark:bg-neutral-950"}
+:::u-button{class="mt-8"}
+---
+to: /companies
+size: lg
+trailing-icon: i-lucide-arrow-right
+---
+Explore Tools
+:::
+::
+
+::u-page-section{class="bg-white dark:bg-neutral-900 border-t border-neutral-200/60 dark:border-neutral-800"}
 #title
 Who This Is For
 
 #description
-Applicants.io is designed for:
+Applicants.io is designed for anyone who needs to evaluate job opportunities before committing:
 
 ::card-group
   :::card
@@ -193,7 +216,13 @@ Applicants.io is designed for:
   Job Seekers
 
   #description
-  Evaluating interviews or offers before accepting
+  **Check a company before you interview.**
+
+  - Common red flags and warning signs
+  - What recruiters typically say vs. reality
+  - Compensation structure transparency
+
+  [Search companies →](/companies){.text-primary hover:underline}
   :::
 
   :::card
@@ -204,7 +233,13 @@ Applicants.io is designed for:
   Researchers
 
   #description
-  Researching unfamiliar companies and comparing opportunities
+  **Research unfamiliar companies and compare opportunities.**
+
+  - Company background and patterns
+  - Network connections and relationships
+  - Historical recruiting behavior
+
+  [Browse companies →](/companies){.text-primary hover:underline}
   :::
 
   :::card
@@ -215,14 +250,22 @@ Applicants.io is designed for:
   Decision Makers
 
   #description
-  Anyone searching "is this company legit" before proceeding
+  **Anyone searching "is this company legit" before proceeding.**
+
+  - Legitimacy verification
+  - Risk assessment tools
+  - Evidence-based insights
+
+  [Search now →](/companies){.text-primary hover:underline}
   :::
 ::
 
-Applicants.io does not host job listings and does not facilitate applications.
+:::note{class="mt-8"}
+**Note:** Applicants.io does not host job listings and does not facilitate applications. We provide research tools to help you make informed decisions.
+:::
 ::
 
-::u-page-section{class="dark:bg-neutral-950"}
+::u-page-section{class="bg-slate-50 dark:bg-neutral-950 border-t border-neutral-200/60 dark:border-neutral-800"}
 #title
 Important Clarification
 
