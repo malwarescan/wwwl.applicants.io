@@ -12,7 +12,7 @@ export default eventHandler(async (event) => {
   const path = withLeadingSlash(slug.replace('.md', ''))
 
   // Try all collections to find the page
-  const collections: Array<keyof Collections> = ['companies', 'methodology', 'guides', 'networks', 'pages', 'landing']
+  const collections: Array<keyof Collections> = ['companies', 'methodology', 'guides', 'networks', 'entities', 'pages', 'landing']
   let page = null
   
   for (const collection of collections) {

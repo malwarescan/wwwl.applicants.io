@@ -96,9 +96,33 @@ export default defineContentConfig({
       type: 'page',
       source: {
         include: '*.md',
-        exclude: 'index.md'
+        exclude: ['index.md']
       },
       schema: z.object({
+        seo: z.object({
+          title: z.string(),
+          description: z.string()
+        }).optional()
+      })
+    }),
+    entities: defineCollection({
+      type: 'page',
+      source: 'entities/**/*.md',
+      schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        headline: z.string().optional(),
+        slug: z.string().optional(),
+        jobTitle: z.string().optional(),
+        worksFor: z.object({
+          '@type': z.literal('Organization'),
+          name: z.string(),
+          url: z.string().url()
+        }).optional(),
+        url: z.string().url().optional(),
+        '@id': z.string().url().optional(),
+        sameAs: z.array(z.string().url()).optional(),
+        knowsAbout: z.array(z.string().url()).optional(),
         seo: z.object({
           title: z.string(),
           description: z.string()

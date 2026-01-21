@@ -3,34 +3,38 @@ const { seo } = useAppConfig()
 
 // Build navigation from all collections
 const { data: navigation } = await useAsyncData('navigation', async () => {
-  const [companies, methodology, guides, networks] = await Promise.all([
+  const [companies, methodology, guides, networks, entities] = await Promise.all([
     queryCollectionNavigation('companies'),
     queryCollectionNavigation('methodology'),
     queryCollectionNavigation('guides'),
-    queryCollectionNavigation('networks')
+    queryCollectionNavigation('networks'),
+    queryCollectionNavigation('entities')
   ])
   
   return [
     ...(companies || []),
     ...(methodology || []),
     ...(guides || []),
-    ...(networks || [])
+    ...(networks || []),
+    ...(entities || [])
   ]
 })
 
 const { data: files } = useLazyAsyncData('search', async () => {
-  const [companies, methodology, guides, networks] = await Promise.all([
+  const [companies, methodology, guides, networks, entities] = await Promise.all([
     queryCollectionSearchSections('companies'),
     queryCollectionSearchSections('methodology'),
     queryCollectionSearchSections('guides'),
-    queryCollectionSearchSections('networks')
+    queryCollectionSearchSections('networks'),
+    queryCollectionSearchSections('entities')
   ])
   
   return [
     ...(companies || []),
     ...(methodology || []),
     ...(guides || []),
-    ...(networks || [])
+    ...(networks || []),
+    ...(entities || [])
   ]
 }, {
   server: false

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem, Collections } from '@nuxt/content'
 import { findPageHeadline } from '@nuxt/content/utils'
-import { generateCompanySchemas } from '~/utils/schema'
+import { generateCompanySchemas, generateEntitySchemas } from '~/utils/schema'
 
 definePageMeta({
   layout: 'docs'
@@ -13,6 +13,7 @@ function getCollectionFromPath(path: string): string | null {
   if (path.startsWith('/methodology/')) return 'methodology'
   if (path.startsWith('/guides/')) return 'guides'
   if (path.startsWith('/networks/')) return 'networks'
+  if (path.startsWith('/entities/')) return 'entities'
   return null
 }
 
@@ -26,12 +27,12 @@ const { data: page } = await useAsyncData(route.path, async () => {
   // Try the determined collection first
   const preferredCollection = getCollectionFromPath(route.path)
   if (preferredCollection) {
-    const page = await queryCollection(preferredCollection).path(route.path).first()
+    const page = await queryCollection(preferredCollection as keyof Collections).path(route.path).first()
     if (page) return page
   }
   
   // If not found, try all collections
-  const collections = ['companies', 'methodology', 'guides', 'networks']
+  const collections = ['companies', 'methodology', 'guides', 'networks', 'entities'] as Array<keyof Collections>
   for (const coll of collections) {
     const page = await queryCollection(coll).path(route.path).first()
     if (page) return page
@@ -49,7 +50,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, async ()
   const preferredCollection = getCollectionFromPath(route.path)
   if (preferredCollection) {
     try {
-      const result = await queryCollectionItemSurroundings(preferredCollection, route.path, {
+      const result = await queryCollectionItemSurroundings(preferredCollection as any, route.path, {
         fields: ['description']
       })
       if (result && result.length > 0) return result
@@ -59,7 +60,7 @@ const { data: surround } = await useAsyncData(`${route.path}-surround`, async ()
   }
   
   // Try other collections if preferred didn't work
-  const collections = ['companies', 'methodology', 'guides', 'networks']
+  const collections = ['companies', 'methodology', 'guides', 'networks', 'entities'] as Array<keyof Collections>
   for (const coll of collections) {
     if (coll === preferredCollection) continue
     try {
@@ -79,23 +80,41 @@ const description = page.value.seo?.description || page.value.description
 // Ensure canonical URL has no trailing slash (except root)
 const canonicalUrl = `${siteUrl}${route.path === '/' ? '' : route.path.replace(/\/$/, '')}`
 
-// Generate JSON-LD schemas for company pages
+// Generate JSON-LD schemas for company pages and entity pages
 const jsonLdSchemas = computed(() => {
   if (route.path.startsWith('/companies/') && page.value) {
+    const p = page.value as any
     const companyData = {
-      title: page.value.title || '',
-      description: page.value.description || '',
-      slug: page.value.slug || route.path.split('/').pop() || '',
-      website: page.value.website,
-      known_aliases: page.value.known_aliases,
-      operating_regions: page.value.operating_regions,
-      last_updated: page.value.last_updated,
-      risk_score: page.value.risk_score,
-      evidence: page.value.evidence,
-      faqs: page.value.faqs
+      title: p.title || '',
+      description: p.description || '',
+      slug: p.slug || route.path.split('/').pop() || '',
+      website: p.website,
+      known_aliases: p.known_aliases,
+      operating_regions: p.operating_regions,
+      last_updated: p.last_updated,
+      risk_score: p.risk_score,
+      evidence: p.evidence,
+      faqs: p.faqs
     }
     return generateCompanySchemas(companyData)
   }
+  
+  if (route.path.startsWith('/entities/') && page.value) {
+    const p = page.value as any
+    const entityData = {
+      title: p.title || '',
+      description: p.description || '',
+      slug: p.slug || route.path.split('/').pop() || '',
+      jobTitle: p.jobTitle,
+      worksFor: p.worksFor,
+      url: p.url,
+      '@id': p['@id'],
+      sameAs: p.sameAs,
+      knowsAbout: p.knowsAbout
+    }
+    return generateEntitySchemas(entityData)
+  }
+  
   return []
 })
 
@@ -131,7 +150,11 @@ useSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-const headline = computed(() => findPageHeadline(navigation?.value, page.value?.path))
+const headline = computed(() => {
+  const nav = navigation?.value
+  if (!nav || !Array.isArray(nav)) return undefined
+  return findPageHeadline(nav, page.value?.path)
+})
 
 // Use Docs component (nuxt-og-image auto-discovers OgImageDocs.vue from OgImage/ directory as 'Docs')
 if (headline.value && title && description) {
@@ -166,7 +189,7 @@ const links = computed(() => {
     >
       <template #links>
         <UButton
-          v-for="(link, index) in page.links"
+          v-for="(link, index) in ((page as any).links || [])"
           :key="index"
           v-bind="link"
         />
@@ -183,7 +206,7 @@ const links = computed(() => {
 
       <USeparator v-if="surround?.length" />
 
-      <UContentSurround :surround="surround" />
+      <UContentSurround :surround="surround || undefined" />
     </UPageBody>
 
     <template

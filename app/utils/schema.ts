@@ -194,3 +194,116 @@ export function generateCompanySchemas(data: CompanyPageData) {
   return schemas
 }
 
+/**
+ * Person/Entity schema data interface
+ */
+export interface EntityPageData {
+  title: string
+  description: string
+  slug: string
+  jobTitle?: string
+  worksFor?: {
+    '@type': 'Organization'
+    name: string
+    url: string
+  }
+  url?: string
+  '@id'?: string
+  sameAs?: string[]
+  knowsAbout?: string[]
+}
+
+/**
+ * Generate Person schema for entity authority pages
+ * This establishes entity reconciliation across multiple sites for Google Knowledge Panel
+ */
+export function generatePersonSchema(data: EntityPageData) {
+  const pageUrl = `${SITE_URL}/entities/${data.slug}`
+  
+  const schema: any = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: data.title,
+    description: data.description
+  }
+
+  // Use the @id field as the unique entity identifier (critical for entity reconciliation)
+  if (data['@id']) {
+    schema['@id'] = data['@id']
+  } else {
+    // Fallback to the page URL if @id not specified
+    schema['@id'] = pageUrl
+  }
+
+  // Primary URL for the entity (the "Entity Home")
+  if (data.url) {
+    schema.url = data.url
+  } else {
+    schema.url = pageUrl
+  }
+
+  // Job title and organization (worksFor)
+  if (data.jobTitle) {
+    schema.jobTitle = data.jobTitle
+  }
+
+  if (data.worksFor) {
+    schema.worksFor = {
+      '@type': data.worksFor['@type'],
+      name: data.worksFor.name,
+      url: data.worksFor.url
+    }
+  }
+
+  // sameAs array creates verification loop across social profiles and other sites
+  if (data.sameAs && data.sameAs.length > 0) {
+    schema.sameAs = data.sameAs
+  }
+
+  // knowsAbout for expertise areas (E-E-A-T signals)
+  if (data.knowsAbout && data.knowsAbout.length > 0) {
+    schema.knowsAbout = data.knowsAbout
+  }
+
+  return schema
+}
+
+/**
+ * Generate WebPage schema for entity pages
+ */
+export function generateEntityWebPageSchema(data: EntityPageData) {
+  const url = `${SITE_URL}/entities/${data.slug}`
+  
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: data.title,
+    description: data.description,
+    url,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Applicants.io',
+      url: SITE_URL
+    },
+    mainEntity: {
+      '@type': 'Person',
+      name: data.title
+    }
+  }
+}
+
+/**
+ * Generate all schemas for an entity page
+ */
+export function generateEntitySchemas(data: EntityPageData) {
+  const schemas: any[] = []
+  
+  // Person schema (primary entity schema)
+  schemas.push(generatePersonSchema(data))
+  
+  // WebPage schema with mainEntity reference
+  schemas.push(generateEntityWebPageSchema(data))
+  
+  return schemas
+}
+
